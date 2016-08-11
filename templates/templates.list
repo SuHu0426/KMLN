@@ -1,0 +1,6 @@
+DebSqz-UltraLight.ext3 DebSqz-UltraLight.ext3 839MB "Own Template."
+boot.img	536M	"boot image"
+ssh.img		5120M	"ssh Template"
+http.img	5120M	"http Template"
+POX.img		5120M	"POX Template"
+ovs-why.img	5120M	"origin Template"

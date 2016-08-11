@@ -1,0 +1,3 @@
+#! /bin/bash
+sudo cp /src4/mln/mln /usr/local/bin/
+/src4/mln/bin/restartDaemon

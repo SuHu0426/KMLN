@@ -1,0 +1,112 @@
+<!ELEMENT project (global, default?, (switch|superclass)*)>
+
+<!ELEMENT global EMPTY>
+<!ATTLIST global
+projName CDATA #REQUIRED
+>
+
+<!ELEMENT default (host)+>
+
+<!ELEMENT switch EMPTY>
+<!ATTLIST switch
+name ID #REQUIRED
+physical_host CDATA #IMPLIED
+switchType (uml|vde|ovs) "ovs"
+vde CDATA #IMPLIED
+ovs CDATA #IMPLIED
+owner CDATA #IMPLIED
+tap CDATA #IMPLIED
+tun_iface CDATA #IMPLIED
+tun_address CDATA #IMPLIED
+>
+
+<!ELEMENT superclass (network*,users?,groups?,host+) >
+<!ATTLIST superclass
+name ID #REQUIRED
+term (xterm|screen|monitor|vnc|spice) "screen"
+color CDATA #IMPLIED
+template CDATA #IMPLIED
+filesystem CDATA #IMPLIED
+swap CDATA #IMPLIED
+size CDATA #IMPLIED
+free_space CDATA #IMPLIED
+qcow (qcow|qcow2|raw) #IMPLIED
+cow_filesystem CDATA #IMPLIED
+format (ext2|ext3|ext4) #IMPLIED
+memory CDATA "64MB"
+vcpu CDATA "1" 
+physical_host CDATA #IMPLIED
+virTech (kvm|uml|xen) "kvm"
+kernel CDATA #IMPLIED
+modules CDATA #IMPLIED
+kvm CDATA #IMPLIED
+root_password CDATA #IMPLIED
+boot_order CDATA #IMPLIED
+nice CDATA #IMPLIED
+owner CDATA #IMPLIED
+sudo CDATA #IMPLIED
+users CDATA #IMPLIED
+group CDATA #IMPLIED
+family (busybox|debian|redhat|windows|suse) "debian"
+vncport CDATA "1"
+vncpass CDATA #IMPLIED
+>
+
+<!ELEMENT host (network*,users?,groups?)>
+<!ATTLIST host
+name ID #REQUIRED
+term (xterm|screen|monitor|vnc|spice) #IMPLIED
+color CDATA #IMPLIED
+template CDATA #IMPLIED
+filesystem CDATA #IMPLIED
+swap CDATA #IMPLIED
+size CDATA #IMPLIED
+free_space CDATA #IMPLIED
+qcow (qcow|qcow2|raw) #IMPLIED
+cow_filesystem CDATA #IMPLIED
+format (ext2|ext3|ext4) #IMPLIED
+memory CDATA #IMPLIED
+vcpu CDATA #IMPLIED
+physical_host CDATA #IMPLIED
+virTech (kvm|uml|xen) #IMPLIED
+kernel CDATA #IMPLIED
+modules CDATA #IMPLIED
+kvm CDATA #IMPLIED
+root_password CDATA #IMPLIED
+boot_order CDATA #IMPLIED
+nice CDATA #IMPLIED
+owner CDATA #IMPLIED
+sudo CDATA #IMPLIED
+group CDATA #IMPLIED
+family (busybox|debian|redhat|windows|suse) #IMPLIED
+vncport CDATA #IMPLIED
+vncpass CDATA #IMPLIED
+>
+
+<!ELEMENT network EMPTY>
+<!ATTLIST network
+name CDATA #REQUIRED
+switch IDREF #IMPLIED
+netmask CDATA #IMPLIED
+gateway CDATA #IMPLIED
+address CDATA #IMPLIED
+broadcast CDATA #IMPLIED
+mac CDATA #IMPLIED
+auto CDATA #IMPLIED
+>
+
+<!ELEMENT users (user*)>
+<!ELEMENT user EMPTY>
+<!ATTLIST user
+username CDATA #REQUIRED
+password CDATA #IMPLIED>
+
+<!ELEMENT groups (group*)>
+<!ELEMENT group (groupuser+)>
+<!ATTLIST group
+groupname CDATA #REQUIRED
+>
+<!ELEMENT groupuser EMPTY>
+<!ATTLIST groupuser
+user CDATA #REQUIRED
+>

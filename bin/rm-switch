@@ -1,0 +1,12 @@
+#! /bin/bash
+IGN=`cat /var/run/uml-utilities/uml_switch.pid`
+
+for pid in `ps -C uml_switch -o pid=`
+  do
+    if [ x${pid} = x${IGN} ]
+      then echo "I see system uml_switch: ${pid}"
+    else 
+      echo "Killing ${pid}"
+      sudo kill ${pid}
+    fi
+  done

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE project SYSTEM "/etc/mln/DTD/kmln.dtd">
+<project>
+  <global projName="CTSP-cloud" />
+  
+  <switch name="lan1"
+	  switchType="vde"
+	  owner="cloud"
+	  tap="tap-ctsp"
+	  tun_iface="eth1"
+	  tun_address="192.168.0.1"
+	  physical_host="CSIE-Cloud01"
+	  />
+
+  <switch name="lan2"
+          switchType="vde"
+          owner="cloud"
+          tap="tap-ctsp"
+          tun_iface="eth1"
+          tun_address="192.168.0.2"
+	  physical_host="CSIE-Cloud02"
+          />
+
+  <superclass name="cloud01"
+    term="screen"
+    virTech="kvm"
+    template="DebSqz-mln.img"
+    size="4096M"
+    memory="256M"
+    qcow="qcow2"
+    physical_host="CSIE-Cloud01"
+    >
+    <network name="eth0"
+	     switch="lan1"
+	     netmask="255.255.255.0"
+	     gateway="192.168.0.1"
+	     />
+    <host name="ctsp01-1">
+      <network name="eth0" address="192.168.0.131"/>
+    </host>  
+    <host name="ctsp01-2">
+      <network name="eth0" address="192.168.0.132"/>
+    </host>
+
+  </superclass>
+
+  <superclass name="cloud02"
+    term="screen"
+    virTech="kvm"
+    template="DebSqz-mln.img"
+    size="4096M"
+    memory="256M"
+    qcow="qcow2"
+    physical_host="CSIE-Cloud02"
+    >
+    <network name="eth0"
+      switch="lan2"
+      netmask="255.255.255.0"
+      gateway="192.168.0.2"
+      />
+    <host name="ctsp11-1">
+      <network name="eth0" address="192.168.0.171"/>
+    </host>  
+    <host name="ctsp11-2">
+      <network name="eth0" address="192.168.0.172"/>
+    </host>
+
+  </superclass>
+</project>

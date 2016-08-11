@@ -1,0 +1,6 @@
+#! /usr/bin/perl
+    use IO::Socket;
+    print "Sending project to ax14:34001\n";
+    my $sock = new IO::Socket::INET(ac14, 34001, 'tcp');
+    $sock or (warn "no socket: $!" and return);
+    print "Socket: $sock\n";

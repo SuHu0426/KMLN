@@ -1,0 +1,46 @@
+
+global  {
+      project ovs
+      
+}
+
+switch lan {
+      switchType ovs
+      owner hsu
+      tap tapovs1
+      tun_iface br0
+      tun_address 192.168.100.13
+      
+}
+
+superclass node {
+      term screen
+      virTech kvm
+      template ovs-wzy.img
+      family debian
+      size 5120M
+      memory 2048M
+      vcpu 2
+      network eth0 {
+        switch lan
+        netmask 255.255.255.0
+        gateway 192.168.100.13
+      }
+}
+
+host kvm-01 {
+      superclass node
+      virTech kvm
+      term screen
+      template ovs-wzy.img
+      size 5120M
+      memory 2048M
+      family debian
+      network eth0 {
+        address 192.168.100.101
+        netmask 255.255.255.0
+        gateway 192.168.100.13
+        switch lan
+      }
+    
+}

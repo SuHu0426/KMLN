@@ -1,0 +1,19 @@
+#! /bin/bash
+
+if [ $# != 1 ]
+   then echo "Usage: $0 iface"
+        echo "This program finds the IP associated with specified iface"
+        exit 1
+fi
+
+# "ifconfig -a" reports all iface devices, use awk to find the
+# specified iface line and get the line after it and print the
+# line to variable Str.
+Str=`sudo ifconfig -a | awk "/^$1/ { getline x; print x }"`
+# echo eliminate useless blank characters, cut out the field
+# we are interested.
+
+if [ -n "${Str}" ]
+   then echo ${Str} | cut -d' ' -f 2 | cut -d':' -f 2
+else exit 2
+fi

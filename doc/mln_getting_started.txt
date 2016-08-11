@@ -1,0 +1,33 @@
+
+
+
+
+
+
+
+
+documentclass[11pt,english,a4paper]article usepackage[latin1]inputenc
+usepackage[T1]fontenc usepackagebabel,graphicx,varioref usepackagepalatino
+usepackagerelsize usepackagevarioref usepackagepdfpages usepackagefancyvrb
+usepackagefancyhdr usepackagesectsty usepackagetimes par usepackage
+[colorlinks=true,pdfstartview=FitH, linkcolor=blue, citecolor=blue,
+urlcolor=blue,bookmarksopen=true]hyperref par parindent=0in par
+fvsetframe=single,framesep=3mm,fontfamily=helvetica,fontsize=scriptsize par
+renewedcommandttfamilysmallbffontfamilyhelvetica par titleGetting started with
+MLN - 1.0.1 authorKyrre M Begnum par begindocument par section*Quick Guide for
+the Impatient labelquickguide par beginenumerate item MLN depends on the
+following software: beginitemize item Perl item uml-utilities item bridge-utils
+item screen item sudo enditemize par item Download MLN: beginitemize item
+Verb+wget http://mln.sourceforge.net/files/mln-latest.tar.gz+ item Verb+tar zxf
+mln-latest.tar.gz+ enditemize par par item Run the interactive setup:
+beginitemize item Verb+cd mln-latest+ item Verb+./mln setup+ item During the
+setup process, accept all defaults by simply hitting Verb+Return+ at each
+prompt. enditemize par item Build an example project: beginitemize item Verb+./
+mln build -f examples/simple-network.mln+ enditemize par item Start your new
+virtual network: beginitemize item Verb+./mln start -p simple-network+
+enditemize par item textbfNow you should have 3 xterms, one for each virtual
+host in the Verb+simple-network+ project. Login as root to each one (no
+password) and play! par item Stop your new virtual network: beginitemize item
+Verb+./mln stop -p simple-network+ enditemize par endenumerate par enddocument
+-------------------------------------------------------------------------------
+     kyrre 2009-11-04

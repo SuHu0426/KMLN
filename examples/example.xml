@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE project SYSTEM "/etc/mln/DTD/kmln.dtd">
+<project>
+  <global projName="simple" />
+
+  <default name="default_class">
+    <network name="eth0" switch="lan" />
+    <host name="first_vm" />  
+  </default>
+
+  <switch name="lan" />
+</project>

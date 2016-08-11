@@ -1,0 +1,16 @@
+#! /bin/bash
+
+if [ -f /var/run/mln.pid ]
+ then
+   PID=`sudo cat /var/run/mln.pid`
+   if [ -d /proc/${PID} ]
+    then sudo kill -2 ${PID}
+    sudo rm /var/run/mln.pid
+   fi
+ else
+   PID=`ps -C mln | grep mln | cut -d " " -f 2`
+   if [ ${PID} > 0 ]
+    then sudo kill -2 ${PID}
+   fi
+fi
+sudo mln daemon -D /var/run/mln.pid

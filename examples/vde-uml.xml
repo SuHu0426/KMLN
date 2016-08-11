@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE project SYSTEM "/etc/mln/DTD/kmln.dtd">
+<project>
+  <global projName="vde-uml" />
+  
+  <switch name="lan"
+	  switchType="vde"
+	  owner="jssu"
+	  tap="tap0"
+	  tun_iface="eth0:0"
+	  tun_address="192.168.0.1"
+	  />
+
+  <superclass name="uml"
+	      term="xterm"
+	      virTech="uml"
+              modules="/usr/local/lib/uml/lib/modules/3.0.0/"
+	      template="DebSqz-UltraLight.ext3"
+	      size="500M"
+	      memory="256M"
+	      >
+    <network name="eth0"
+	     switch="lan"
+	     netmask="255.255.255.0"
+	     gateway="192.168.0.1"
+	     />
+    <host name="uml-01">
+      <network name="eth0" address="192.168.0.2"/>
+    </host>  
+  </superclass>
+</project>

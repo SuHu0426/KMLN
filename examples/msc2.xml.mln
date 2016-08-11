@@ -1,0 +1,309 @@
+
+global  {
+      project msc2
+      
+}
+
+switch banana-entrance {
+      switchType ovs
+      owner hsu
+      tap tapovs61
+      tun_iface br1
+      tun_address 140.120.15.171
+      service_host banana
+      
+}
+
+switch banana-POX1 {
+      switchType ovs
+      owner hsu
+      tap tapovs51
+      tun_iface br0
+      tun_address 192.168.100.13
+      service_host banana
+      
+}
+
+switch banana-POX2 {
+      switchType ovs
+      owner hsu
+      tap tapovs52
+      tun_iface br0
+      tun_address 192.168.100.13
+      service_host banana
+      
+}
+
+switch Amath-Client06-201 {
+      switchType ovs
+      owner hsu
+      tap tapovs201
+      tun_iface br0
+      tun_address 140.120.8.106
+      service_host Amath-Client06
+      
+}
+
+switch Amath-Client06-202 {
+      switchType ovs
+      owner hsu
+      tap tapovs202
+      tun_iface br0
+      tun_address 140.120.8.106
+      service_host Amath-Client06
+      
+}
+
+switch Amath-Client06-203 {
+      switchType ovs
+      owner hsu
+      tap tapovs203
+      tun_iface br0
+      tun_address 140.120.8.106
+      service_host Amath-Client06
+      
+}
+
+switch Lab-81 {
+      switchType ovs
+      owner hsu
+      tap tapovs81
+      tun_iface br0
+      tun_address 192.168.100.20
+      service_host Lab
+      
+}
+
+switch Lab-82 {
+      switchType ovs
+      owner hsu
+      tap tapovs82
+      tun_iface br0
+      tun_address 192.168.100.20
+      service_host Lab
+      
+}
+
+switch Lab-83 {
+      switchType ovs
+      owner hsu
+      tap tapovs83
+      tun_iface br0
+      tun_address 192.168.100.20
+      service_host Lab
+      
+}
+
+superclass banana_en {
+      term screen
+      virTech kvm
+      template ovs-wzy.img
+      size 5120M
+      memory 512M
+      vcpu 1
+      family debian
+      network eth0 {
+        netmask 255.255.255.192
+      }
+}
+
+host entrance {
+      superclass banana_en
+      service_host banana
+      virTech kvm
+      term screen
+      template ovs-wzy.img
+      size 5120M
+      memory 512M
+      family debian
+      network eth0 {
+        address 140.120.15.175
+        gateway 140.120.15.171
+        switch banana-entrance
+        netmask 255.255.255.192
+      }
+    
+}
+
+superclass banana_POX {
+      term screen
+      virTech kvm
+      template POX.img
+      size 5120M
+      memory 1024M
+      vcpu 2
+      family debian
+      network eth0 {
+        netmask 255.255.255.0
+      }
+}
+
+host POX1 {
+      superclass banana_POX
+      service_host banana
+      virTech kvm
+      term screen
+      template POX.img
+      size 5120M
+      memory 1024M
+      family debian
+      network eth0 {
+        address 192.168.100.51
+        gateway 192.168.100.13
+        switch banana-POX1
+        netmask 255.255.255.0
+      }
+    
+}
+
+host POX2 {
+      superclass banana_POX
+      service_host banana
+      virTech kvm
+      term screen
+      template POX.img
+      size 5120M
+      memory 1024M
+      family debian
+      network eth0 {
+        address 192.168.100.52
+        gateway 192.168.100.13
+        switch banana-POX2
+        netmask 255.255.255.0
+      }
+    
+}
+
+superclass Amath-Client06 {
+      term screen
+      virTech kvm
+      template http.img
+      size 5120M
+      memory 512M
+      vcpu 1
+      family debian
+      network eth0 {
+        netmask 255.255.255.0
+      }
+}
+
+host http-01 {
+      superclass Amath-Client06
+      service_host Amath-Client06
+      virTech kvm
+      term screen
+      template http.img
+      size 5120M
+      memory 512M
+      family debian
+      network eth0 {
+        address 140.120.8.201
+        gateway 140.120.8.106
+        switch Amath-Client06-201
+        netmask 255.255.255.0
+      }
+    
+}
+
+host http-02 {
+      superclass Amath-Client06
+      service_host Amath-Client06
+      virTech kvm
+      term screen
+      template http.img
+      size 5120M
+      memory 512M
+      family debian
+      network eth0 {
+        address 140.120.8.202
+        gateway 140.120.8.106
+        switch Amath-Client06-202
+        netmask 255.255.255.0
+      }
+    
+}
+
+host http-03 {
+      superclass Amath-Client06
+      service_host Amath-Client06
+      virTech kvm
+      term screen
+      template http.img
+      size 5120M
+      memory 512M
+      family debian
+      network eth0 {
+        address 140.120.8.203
+        gateway 140.120.8.106
+        switch Amath-Client06-203
+        netmask 255.255.255.0
+      }
+    
+}
+
+superclass Lab {
+      term screen
+      virTech kvm
+      template ssh.img
+      size 5120M
+      memory 512M
+      vcpu 1
+      family debian
+      network eth0 {
+        netmask 255.255.255.0
+      }
+}
+
+host ssh-01 {
+      superclass Lab
+      service_host Lab
+      virTech kvm
+      term screen
+      template ssh.img
+      size 5120M
+      memory 512M
+      family debian
+      network eth0 {
+        address 192.168.100.81
+        gateway 192.168.100.20
+        switch Lab-81
+        netmask 255.255.255.0
+      }
+    
+}
+
+host ssh-02 {
+      superclass Lab
+      service_host Lab
+      virTech kvm
+      term screen
+      template ssh.img
+      size 5120M
+      memory 512M
+      family debian
+      network eth0 {
+        address 192.168.100.82
+        gateway 192.168.100.20
+        switch Lab-82
+        netmask 255.255.255.0
+      }
+    
+}
+
+host ssh-03 {
+      superclass Lab
+      service_host Lab
+      virTech kvm
+      term screen
+      template ssh.img
+      size 5120M
+      memory 512M
+      family debian
+      network eth0 {
+        address 192.168.100.83
+        gateway 192.168.100.20
+        switch Lab-83
+        netmask 255.255.255.0
+      }
+    
+}

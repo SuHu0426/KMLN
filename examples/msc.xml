@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!DOCTYPE project SYSTEM "/etc/mln/DTD/kmln.dtd">
+<project>
+  <global projName="msc" />
+
+  <switch name="banana-entrance"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs61"
+          tun_iface="br1"
+          tun_address="140.120.15.171"
+          physical_host="banana"
+          />
+  <switch name="banana-POX1"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs51"
+          tun_iface="br0"
+          tun_address="192.168.100.13"
+          physical_host="banana"
+          />
+  <switch name="banana-POX2"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs52"
+          tun_iface="br0"
+          tun_address="192.168.100.13"
+          physical_host="banana"
+          />
+  
+  <switch name="lotus-71"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs71"
+          tun_iface="br0"
+          tun_address="192.168.100.12"
+          physical_host="lotus"
+          />
+  <switch name="lotus-72"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs72"
+          tun_iface="br0"
+          tun_address="192.168.100.12"
+          physical_host="lotus"
+          />
+  <switch name="lotus-73"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs73"
+          tun_iface="br0"
+          tun_address="192.168.100.12"
+          physical_host="lotus"
+          />
+
+  <switch name="Lab-81"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs81"
+          tun_iface="br0"
+          tun_address="192.168.100.20"
+          physical_host="Lab"
+          />
+  <switch name="Lab-82"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs82"
+          tun_iface="br0"
+          tun_address="192.168.100.20"
+          physical_host="Lab"
+          />
+  <switch name="Lab-83"
+          switchType="ovs"
+          owner="hsu"
+          tap="tapovs83"
+          tun_iface="br0"
+          tun_address="192.168.100.20"
+          physical_host="Lab"
+          />
+
+  <superclass name="banana_en"
+              term="screen"
+              virTech="kvm"
+              template="ovs-wzy.img"
+              size="5120M"
+              memory="512M"
+              >
+  <network name="eth0"
+             netmask="255.255.255.192"
+             />
+    <host name="entrance" physical_host="banana">
+      <network name="eth0" 
+               address="140.120.15.175"
+               gateway="140.120.15.171"
+               switch="banana-entrance"        
+               />
+    </host>
+  </superclass>
+
+  <superclass name="banana_POX"
+              term="screen"
+              virTech="kvm"
+              template="POX.img"
+              size="5120M"
+              memory="1024M"
+              vcpu="2"
+              >
+  <network name="eth0"
+             netmask="255.255.255.0"
+             />
+    <host name="POX1" physical_host="banana">
+      <network name="eth0" 
+               address="192.168.100.51"
+               gateway="192.168.100.13"
+               switch="banana-POX1"        
+               />
+    </host>
+
+    <host name="POX2" physical_host="banana">
+      <network name="eth0" 
+               address="192.168.100.52"
+               gateway="192.168.100.13"
+               switch="banana-POX2"        
+               />
+    </host>
+  </superclass>  
+  
+  <superclass name="lotus"
+              term="screen"
+              virTech="kvm"
+              template="http.img"
+              size="5120M"
+              memory="512M"
+              >
+    <network name="eth0"
+             netmask="255.255.255.0"
+             />
+
+    <host name="http-01" physical_host="lotus">
+      <network name="eth0" 
+               address="192.168.100.71"
+               gateway="192.168.100.12"
+               switch="lotus-71"        
+               />
+    </host>
+
+    <host name="http-02" physical_host="lotus">
+      <network name="eth0" 
+               address="192.168.100.72"
+               gateway="192.168.100.12"
+               switch="lotus-72"        
+               />
+    </host>
+
+    <host name="http-03" physical_host="lotus">
+      <network name="eth0" 
+               address="192.168.100.73"
+               gateway="192.168.100.12"
+               switch="lotus-73"        
+               />
+    </host>
+  </superclass>
+
+  <superclass name="Lab"
+              term="screen"
+              virTech="kvm"
+              template="ssh.img"
+              size="5120M"
+              memory="512M"
+              >
+    <network name="eth0"
+             netmask="255.255.255.0"
+             />
+
+    <host name="ssh-01" physical_host="Lab">
+      <network name="eth0" 
+               address="192.168.100.81"
+               gateway="192.168.100.20"
+               switch="Lab-81"        
+               />
+    </host>
+
+    <host name="ssh-02" physical_host="Lab">
+      <network name="eth0" 
+               address="192.168.100.82"
+               gateway="192.168.100.20"
+               switch="Lab-82"        
+               />
+    </host>
+
+    <host name="ssh-03" physical_host="Lab">
+      <network name="eth0" 
+               address="192.168.100.83"
+               gateway="192.168.100.20"
+               switch="Lab-83"        
+               />
+    </host>
+  </superclass>  
+
+</project>

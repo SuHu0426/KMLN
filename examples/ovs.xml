@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE project SYSTEM "/etc/mln/DTD/kmln.dtd">
+<project>
+  <global projName="ovs" />
+  
+  <switch name="lan"
+	  switchType="ovs"
+	  owner="hsu"
+	  tap="tapovs1"
+	  tun_iface="br0"
+	  tun_address="192.168.100.13"
+	  />
+
+  <superclass name="node"
+	      term="screen"
+	      virTech="kvm"
+	      template="ovs-wzy.img"
+              family="debian"
+	      size="5120M"
+	      memory="2048M"
+              vcpu="2"
+	      >
+    <network name="eth0"
+	     switch="lan"
+	     netmask="255.255.255.0"
+	     gateway="192.168.100.13"
+             />
+    <host name="kvm-01">
+      <network name="eth0" address="192.168.100.101"/>
+    </host>  
+  </superclass>
+
+</project>

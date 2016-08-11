@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE PROJECT SYSTEM "kmln-v5.dtd">
+<PROJECT>
+  <global project="vde-kvm" />
+  
+  <switch name="lan"
+	  vde=""
+	  owner="hsu"
+	  tap="tap0"
+	  tun_iface="eth0"
+	  tun_address="192.168.0.1"
+	  />
+  <switch name="lan"
+	  vde=""
+	  owner="hsu"
+	  tap="tap0"
+	  tun_iface="eth1"
+	  tun_address="192.168.0.14"
+	  />
+
+  <superclass name="kvm"
+	      term="monitor"
+	      kvm="/usr/bin/kvm"
+	      template="DebSqz-mini.img"
+	      size="800M"
+	      memory="256M"
+	      >
+    <network name="eth0"
+	     switch="lan"
+	     netmask="255.255.255.0"
+	     gateway="192.168.0.1"
+	     />
+    <users>
+      <user username="hsu" password="mypasswd" />
+      <user username="guest" password="mypasswd2" />
+    </users>
+    <groups>
+      <group groupname="admin">
+	<groupuser user="hsu" />
+      </group>
+    </groups>
+    <host name="kvm-01">
+      <network name="eth0" address="192.168.0.24"/>
+    </host>
+    <host name="kvm-02"
+	  term="xterm">
+      <network name="eth0" address="192.168.0.25" switch="lan2"/>
+    </host>
+</superclass>
+
+  <default>
+    <host name="uml-01"/>
+  </default>
+
+</PROJECT>

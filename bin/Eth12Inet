@@ -1,0 +1,10 @@
+#! /bin/bash
+
+sodo echo "Need Su passwd:"
+sudo chmod 666 /dev/net/tun
+ls -l /dev/net/tun
+sudo tunctl -u hsu -t tap0
+sudo ifconfig tap0 192.168.0.1 netmask 255.255.255.0 up
+# Connect switch daemon to tap0 so that unknown IP can be
+# forwarded to physical eth1 card for futher handling.
+sudo /usr/bin/uml_switch -tap tap0 -unix network/lan -daemon
